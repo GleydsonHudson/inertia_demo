@@ -24,3 +24,7 @@ Route::get('/users', static function () {
 Route::get('/settings', static function () {
     return inertia('Settings');
 });
+
+Route::post('/logout', static function () {
+    dd('logging the user out');
+});
