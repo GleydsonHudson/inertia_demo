@@ -1,17 +1,21 @@
 <template>
-    <nav>
-        <ul>
+    <nav class="mt-6">
+        <ul class="list-disc">
             <li>
-                <Link href="/">Home</Link>
+                <NavLink href="/" :active="$page.component === 'Home'">
+                    Home
+                </NavLink>
             </li>
             <li>
-                <Link href="/users">Users</Link>
+                <NavLink href="/users" :active="$page.component === 'Users'">
+                    Users
+                </NavLink>
+
             </li>
             <li>
-                <Link href="/settings">Settings</Link>
-            </li>
-            <li>
-                <Link href="/logout" method="post" as="button">Log Out</Link>
+                <NavLink href="/settings" :active="$page.component === 'Settings'">
+                    Settings
+                </NavLink>
             </li>
         </ul>
     </nav>
@@ -19,9 +23,10 @@
 
 <script>
 import {Link} from "@inertiajs/vue3";
+import NavLink from "./NavLink.vue";
 
 export default {
-    components: {Link}
+    components: {NavLink, Link}
 }
 </script>
 
