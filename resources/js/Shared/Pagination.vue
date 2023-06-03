@@ -1,10 +1,8 @@
 <script>
-import {defineComponent} from 'vue'
-
-export default defineComponent({
+export default {
     name: "Pagination",
-    props: {links: Array},
-})
+    props: { links: Array }
+}
 </script>
 
 <template>
@@ -19,7 +17,3 @@ export default defineComponent({
         />
     </div>
 </template>
-
-<style scoped>
-
-</style>

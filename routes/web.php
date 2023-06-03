@@ -9,7 +9,15 @@ Route::get('/', static function () {
 
 Route::get('/users', static function () {
     return inertia('Users', [
-        'users' => User::select(['id', 'name'])->paginate(10),
+        'users' => User::query()
+                       ->when(Request::input('search'), function ($query, $search) {
+                           $query->where('name', 'like', "%{$search}%");
+                       })
+                       ->select(['id', 'name'])
+                       ->paginate(10)
+                       ->withQueryString(),
+
+        'filters' => Request::only(['search']),
     ]);
 });
 

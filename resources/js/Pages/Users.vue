@@ -5,7 +5,12 @@
         <meta type="description" content="User information" head-key="description">
     </Head>
 
-    <h1 class="text-3xl">Users</h1>
+    <div class="flex justify-between mb-6">
+
+        <h1 class="text-3xl">Users</h1>
+
+        <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg">
+    </div>
 
     <div class="flex flex-col">
         <div class="-mv-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -37,15 +42,35 @@
         </div>
     </div>
 
-    <!-- Paginator -->
-    <Pagination :links="users.links" class="mt-6" />
+    <Pagination :links="users.links" class="mt-6"/>
 </template>
 
-<script setup>
+<script>
 import Pagination from "../Shared/Pagination.vue";
 
-defineProps({
-    users: Object
-});
+export default {
+    components: {Pagination},
+
+    props: {
+        users: Object,
+        filters: Object
+    },
+
+    data() {
+        return {
+            search: this.filters.search,
+        }
+    },
+
+    watch: {
+        search(value) {
+            this.$inertia.get('/users', { search: value}, {
+                preserveState: true,
+                replace: true,
+            })
+        }
+    }
+
+}
 </script>
 
