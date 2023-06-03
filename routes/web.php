@@ -9,7 +9,7 @@ Route::get('/', static function () {
 
 Route::get('/users', static function () {
     return inertia('Users', [
-        'users' => User::select('name')->get(),
+        'users' => User::select(['id', 'name'])->paginate(10),
     ]);
 });
 
